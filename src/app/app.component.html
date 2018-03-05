@@ -1,0 +1,54 @@
+<div class="container" style="padding-top:20px;">
+    <div class="jumbotron">
+
+        <form class="form-horizontal" #myForm="ngForm">
+
+
+            <div class="form-group">
+                <label for="user" class="col-sm-2 control-label">账号</label>
+                <div class="col-sm-10">
+                    <input type="text" #user="ngModel" ngModel name="user" required class="form-control" id="user">
+                    <div class="alert alert-danger" role="alert" *ngIf="user.errors && user.touched">
+                        <div *ngIf="user.errors.required">
+                            用户必填未填
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-sm-2 control-label">手机</label>
+                <div class="col-sm-10">
+                    <input type="text" #tel="ngModel" ngModel name="tel" required minlength="11" pattern="[0-9]*" class="form-control" id="tel">
+                    <div class="alert alert-danger" role="alert" *ngIf="tel.errors && tel.touched">
+                        <div *ngIf="tel.errors.required">
+                            手机必填未填
+                        </div>
+                        <div *ngIf="tel.errors.minlength">
+                            手机长度不可以小于11
+                        </div>
+                        <div *ngIf="tel.errors.pattern">
+                            手机请输入数字
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" [disabled]='myForm.invalid' class="btn btn-success">登录</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" (click)="see(myForm);" class="btn btn-default">查看</button>
+                </div>
+            </div>
+            <pre>{{myForm.value|json}}</pre>
+            <pre>{{user.errors|json}}</pre>
+            <pre>{{tel.errors|json}}</pre>
+
+        </form>
+
+    </div>
+</div>
